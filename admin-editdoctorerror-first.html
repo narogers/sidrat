@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/admin-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+    
+    <script type="text/javascript" src="scripts/jquery-1.5.2.js"></script>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="admin.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global primary">
+        <a href="admin.html" class="active">home</a>
+        <a href="admin-media.html">media</a>
+        <a href="admin-doctor.html">doctor</a>
+        <a href="admin-companion.html">companion</a>
+        <a href="admin-search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="admin.html">administration</a>
+          <a href="admin-doctor.html">Doctors</a>
+          First Doctor
+        </ul>
+      </nav>
+
+      <h1>First Doctor</h1>
+    </section>
+    
+    <form action="admin-confirmdoctor-first.html" method="post" id="primary-form">
+     <div class="label_and_fields">
+       <div class="label">
+       <label class="error">Image</label>
+       <p class="tips">File must be less than 500k. Supported formats are JPEG and PNG.</p>
+       </div>
+       
+       <div class="fields">
+         <p class="errors">The selected file is too large. Please choose an alternate version.</p>
+         <img src="images/doctors/1st-doctor-icon.jpg" class="preview" />
+         <input type="file" name="image" />
+       </div>
+     </div>
+
+      <div class="label_and_fields">
+        <div class="label">
+          <label>Summary</label>
+          <p class="tips">Brief character description</p>
+        </div>
+        <div class="fields">
+          <textarea name="summary" rows="10" cols="60">The measuring stick by which all future Doctors would be compared, William Hartnell was the first actor cast in the role of the mysterious Time Lord. Already an established performer he played the part of a grumpy old man hiding from his past.
+        
+William Hartnell eventually stepped down due to failing health in early 1966. This paved the way for the first of many regenerations and opportunities for writers and actors to reinvent the role throughout the next half century.</textarea>
+         </div>
+     </div>
+     
+     <div class="label_and_fields">
+       <div class="label">
+         <label>Played by</label>
+       </div>
+       <div class="fields">
+         <input type="text" name="played_by" placeholder="Actor / actress" value="William Hartnell" />
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <label class="error">Years</label>
+         <p class="tips">Original run in the role (ie '1963 to 1966')</p>
+       </div>
+       <div class="fields">
+         <p class="errors">The ending year must follow the starting year.</p>
+         <input type="text" name="start_year" size="6" /> to <input type="text" name="end_year" size="6" />
+       </div>
+     </div>
+     
+    <div class="fields">
+      <input type="submit" value="Save changes" />
+      <span class="cancel_form button"><a href="admin-doctor.html">Cancel changes</a></span>
+    </div>
+    </form>
+    
+    <footer>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="media.html">by media</a>
+        <a href="doctor.html">by doctor</a>
+        <a href="companion.html">by companion</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+    </footer>
+    
+    <script type="text/javascript">
+      $(function() {
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        $('.submit_form a').click(
+          function() { $('#primary-form').submit(); }
+        );
+      });
+    </script>
+  </body>
+</html>

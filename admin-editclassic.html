@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/admin-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+
+    <script src="scripts/jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="scripts/helpers.js" type="text/javascript"></script>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="admin.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <!-- Need to add a jQuery hook to prompt if you navigate away from this page -->
+    <nav class="global primary">
+        <a href="admin.html">home</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries.html">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html" class="active">books</a>
+        <a href="admin-search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="admin.html">administration</a>
+          <a href="admin-vna.html">Classic series</a>
+          edit entry
+        </ul>
+      </nav>
+    </section>
+
+    <form id="resource_information" method="post" action="admin-addclassic-confirmation.html">
+      <h2>Details</h2>
+      <fieldset id="metadata" class="active">
+      
+      <div class="label_and_fields">
+        <label for="series">Series</label>
+        <div class="fields">
+          <p class="default">Classic Series</p>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <label>Publisher</label>
+        <div class="fields">
+          <input type="hidden" name="publisher" value="BBC">BBC</input>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <label for="title">Title</label>
+        <div class="fields">
+          <input type="text" name="title" size="60" autofocus value="The Curse of Fenric" />
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <label for="contributor">
+          Writer(s)
+        </label>
+        <div class="fields">
+          <ul>
+            <li>
+              <input type="text" name="contributor" size="60" value="Ian Briggs" /><span class="add_item button"><a href="#">+</a></span>
+</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <label>Release date</label>
+        <div class="fields">
+          <select name="release_month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June/option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10" selected>October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input type="text" name="release_year" size="8" maxlength="4" placeholder="2011" value="2003" />
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+       <label>Format</label>
+        <div class="fields">         
+          <label><input type="radio" name="format" value="cd" checked>Audio CD</input></label>
+          <label><input type="radio" name="format" value="dvd" checked>DVD</input></label>
+          <label><input type="radio" name="format" value="vhs">VHS </input></label>
+        </div>
+      </div>
+      <nav>
+        <a href="#broadcast_history" class="next">Next section</a>
+      </nav>
+      </fieldset>
+  
+      <h2>Broadcast history</h2>
+      <fieldset id="broadcast_history">
+       <div class="label_and_fields">
+        <label>Order</label>
+        <div class="fields">
+          Season
+          <select name="season">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26" selected>26</option>
+            <option value="Other">Other</option>
+          </select>
+          
+          ( Episode <input type="text" size="5" name="serial_order" placeholder="12" value="132" /> )
+        </div>
+      </div>
+
+       <div class="label_and_fields">
+        <label>Broadcast between</label>
+        <div class="fields">
+          <input type="text" name="broadcast_start" placeholder="yyyy.mm.dd" size="30" value="1989.09.06" /> and
+          <input type="text" name="broadcast_end" placeholder="yyyy.mm.dd" size="30" value="1989.09.27" />
+        </div>
+      </div>
+            
+      <div class="label_and_fields">
+        <label>Length</label>
+        <div class="fields">         
+          <input type="text" name="episode_count" size="12" placeholder="4" value="4" /> episodes 
+          (<input type="text" name="length" size="12" placeholder="84" value="102" /> minutes)
+        </div>
+      </div>
+      
+      <nav>
+        <a href="#metadata" class="previous">Previous section</a>
+        <a href="#featuring" class="next">Next section</a>
+      </nav>
+      </fieldset>
+      
+      <h2>Featured characters</h2>
+      <fieldset id="featuring">
+
+      <div class="label_and_fields">  
+        <label>Doctor(s)</label>
+        <div class="fields">
+          <label><input type="checkbox" name="doctor" value="1"  /> First</label>
+          <label><input type="checkbox" name="doctor" value="2"  /> Second</label>
+          <label><input type="checkbox" name="doctor" value="3"  /> Third</label>
+          <label><input type="checkbox" name="doctor" value="4"  /> Fourth</label>
+          <label><input type="checkbox" name="doctor" value="5"  /> Fifth</label>
+          <label><input type="checkbox" name="doctor" value="6"  /> Sixth</label>
+          <label><input type="checkbox" name="doctor" value="7" checked  /> Seventh</label>
+          <label><input type="checkbox" name="doctor" value="8" /> Eighth</label>
+          <!--
+          <label><input type="checkbox" name="doctor" value="9" disabled /> Ninth</label>
+          <label><input type="checkbox" name="doctor" value="10" disabled /> Tenth</label>
+          <label><input type="checkbox" name="doctor" value="11" disabled /> Eleventh</label>
+          -->
+          <label><input type="checkbox" name="doctor" value="none" /> None</label>
+        </div>
+      </div>
+
+      <div class="label_and_fields">        
+        <label for="companion">Companion(s) </label>
+        <div class="fields">
+          <ul>
+            <li><input type="text" name="companion" size="60" value="Ace" /><span class="add_item button"><a href="#">+</a></span>
+</li>
+          </ul>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#metadata" class="previous">Previous section</a>
+        <a href="#summary" class="next">Next section</a>
+      </nav>
+      </fieldset>
+      
+      <h2>Summary</h2>
+      <fieldset id="summary">
+
+      <div class="label_and_fields">        
+        <label>Description</label>
+        <div class="fields">
+          <textarea name="summary" rows="15" cols="60" placeholder="Enter the summary as it appears on the back of the case or book. Markdown conventions can be used for emphasis and formatting.">Responding to a distress signal, the Doctor and Ace arrive near the village of Carbury, where a nuclear missile convoy has run into difficulties. The peace of the English countryside is shattered as UNIT troops are besieged by armored knights from another dimension. As the crisis deepens, Brigadier Lethbridge-Stewart is called out of retirement to join the battle. Together, he and the Doctor must face the Destroyer, a fearsome demon summoned by the witch queen Morgaine to devour the world.</textarea>
+        </div>
+     </div>
+
+      <div class="label_and_fields">        
+        <label>Cover image</label>
+        <div class="fields">
+          <input type="file" accept="image/png, image/jpg, image/gif" name="front_cover" />
+        </div>
+     </div>
+     
+      <nav>
+        <a href="#featuring" class="previous">Previous section</a>
+        <a href="admin-addbook-confirmation.html" class="submit">Add new entry</a>
+      </nav>
+      </fieldset>
+    </form>
+    
+    <footer>
+      <nav>
+        <a href="admin.html">admin</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html">print</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers
+      </p>
+    </footer>
+    
+    <script type="text/javascript">
+      $(function() {
+        $('fieldset nav a').live('click', function() {
+          fieldset_target = 'fieldset#' + $(this).attr('href').slice(1);
+
+          $(this).parents('fieldset').slideUp(500).removeClass('active');
+          $(fieldset_target).slideDown(500).addClass('active');
+        });
+        
+       $('.delete_item').live('click', function() {
+         $(this).parent().remove();
+       });
+       
+       $('.add_item').live('click', function() {
+         new_copy = $(this).parent().clone();
+         
+         if ($(this).hasClass('add_item')) {
+           new_copy.children('span.button').empty().append('x').removeClass('add_item').addClass('delete_item');
+         }
+         $(this).parents('ul').append(new_copy);
+       });
+      });
+    </script>
+  </body>
+</html>

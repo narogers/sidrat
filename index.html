@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="media.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, Discs, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global">
+        <a href="index.html" class="active">home</a>
+        <div class="submenu">
+          <a href="media.html">browse by media</a>
+          <!---
+          <ul class="secondary">
+            <li><a href="media-vna.html">New adventures</a></li>
+            <li><a href="media-vma.html">Missing adventures</a></li>
+            <li><a href="media-eda.html">Eighth Doctor Adventures</a></li>
+            <li><a href="media-pda.html">Past Doctor Adventures</a></li>
+            <li><a href="media-nsb.html">New series (novels)</a></li>
+            <li><a href="media-other.html">Other materials</a></li>
+          </ul>
+          <ul class="secondary">
+            <li><a href="media-classic.html">Classic series</a></li>
+            <li><a href="media-newseries.html">New series</a></li>
+            <li><a href="media-spinoffs.html">Spinoffs</a></li>
+          </ul>
+          -->
+        </div>
+        <a href="doctor.html">browse by doctor</a>
+        <a href="companion.html">browse by companion</a>
+        <a href="search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <h1>Special Inventory of Records, Discs, and Texts</h1>
+      <p>Welcome to SIDRAT. Designed so you can spend less time tracking the Doctor and more time watching him.</p>
+      <p>This database tracks Doctor Who related books and videos from the past twenty years. Allowing you to track which items you own, which ones are on the horizon, and which are most elusive the goal is to make it easier to manage your own personal collection.</p>
+    </section>
+
+    <section class="featured_item">
+      <a href="media-bookentry.html"><img src="images/covers/vna-12-small.jpg" title="The Pit" class="logo"></a>
+      <section class="details">
+        <h2 class="title"><a href="media-bookentry.html">The Pit</a> (Virgin New Adventures)</h2>
+        <div class="creator"><a href="media-author.html">Neil Penswick</a></div>
+        <div class="publication_date">Published March 1993</div>
+        <div class="rating">
+          <input type="radio" name="rating_34" value="1" />
+          <input type="radio" name="rating_34" value="2" checked />
+          <input type="radio" name="rating_34" value="3" />
+          <input type="radio" name="rating_34" value="4" />
+          <input type="radio" name="rating_34" value="5" />          
+        </div>
+        <div class="summary">
+          <p>In an attempt to lift the Doctor out of his irritable and erratic mood, Bernice suggests he investigates the mystery of the Seven Planets - an entire planetary system that disappeared without trace several decades before Bernice was born.</p>
+          <p>One of the Seven Planets is a nameless giant, quarantined against all intruders. But when the TARDIS materializes, it becomes clear that the plane has other visitors: a hit-squad of killer androids; a trespassing scientist and his wife; and two shape-changing criminals with their team of slaves.</p>
+          <p>As riot and anarchy spread on the system's colonized worlds, the Doctor is flung into another universe while Bernice closes in on the horror that is about to be unleashed - a horror that comes from a terrible secret in the Time Lords' past.</p>
+        </div>
+      </section>
+    </section>
+    
+    <section class="cluster">
+      <figure>
+        <a href="media.html"><img src="images/media-icon.jpg" title="Browse by media"></a>
+        <figcaption>Browse by media</figcaption>
+      </figure>
+
+      <figure>
+        <a href="doctor.html"><img src="images/doctor-icon.jpg" title="Browse by Doctor"></a>
+        <figcaption>Browse by Doctor</figcaption>
+      </figure>
+
+      <figure>
+        <a href="companion.html"><img src="images/companion-icon.png" title="Browse by companion"></a>
+        <figcaption>Browse by companion</figcaption>
+      </figure>
+
+      <figure>
+        <a href="search.html"><img src="images/search-icon.jpg" title="Search the database"></a>
+        <figcaption>Search the database</figcaption>
+      </figure>
+    </section>
+
+    <footer>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="media.html">by media</a>
+        <a href="doctor.html">by doctor</a>
+        <a href="companion.html">by companion</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+      
+
+    </footer>
+  </body>
+</html>

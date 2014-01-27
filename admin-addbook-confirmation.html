@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/admin-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+
+    <script src="scripts/jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="scripts/helpers.js" type="text/javascript"></script>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="admin.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <!-- Need to add a jQuery hook to prompt if you navigate away from this page -->
+    <nav class="global primary">
+        <a href="admin.html" class="active">home</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries.html">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html" class="active">books</a>
+        <a href="admin-search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="admin.html">administration</a>
+          <a href="admin-vna.html">Virgin New Adventures</a>
+          edit entry
+        </ul>
+      </nav>
+    </section>
+    
+    <section class="preview_controls">
+      <p><a href="#" class="more_information">Additional metadata</a><p>
+      
+      <nav>
+        <a href="admin-addbook.html">Return to form</a>
+        <a href="admin-vna.html">Save entry</a>
+      </nav>
+    </section>
+    
+    <section class="item_details">
+      <img src="images/cover-placeholder-large.png" title="Sleepy">
+      <section class="details">
+        <h1 class="title">Sleepy</h1>
+        <div class="creator">Kate Orman</div>
+
+        <div class="grouping marquee">        
+          <p class="rating">[5 out of 5]</p>
+          <div class="label_and_value status">
+            <span class="label">Status</span>
+            <span class="value">Owned (<a href="#" class="update">update</a>)</span>
+          </div>
+        </div>
+        
+       <h2>Summary</h2>
+         <div class="summary">
+          <quote>'Stay the hell out of my mind,' hissed Forrester. 'Just stay away from me.' She turned and stalked out of the room. Chris put his head in his hands.</quote>
+          <p>The Earth colony on Yemaya 4 is a very ordinary place. The colonists spend their time farming, building homes, raising families.</p>
+          <p>But when the Doctor and his companions arrive they find a virus sweeping through the population, unleashing the colonists' latent psychic powers. The Doctor and Chris fall prey to the infection, and discover telepathy is not the only symptom. Chris is unable to resist the call of an ancient place of sacrifice, while Roz and Benny travel back in time to the origin of the virus, and uncover a desperate bid for immortality.</p>
+          <p>And all the while the Doctor is playing a dangerous game with troopers of the Dione-Kisumu company, who have come either to reclaim the stolen biotechnology - or to sterilize the planet.</p>   
+        </div>
+
+        <div class="grouping">
+          <div class="label_and_value release_date">
+            <span class="label">Release Date</span>
+            <span class="value">March 1996 (paperback)</span>
+          </div>
+
+          <div class="label_and_value length">
+            <span class="label">Length</span>
+            <span class="value">252 pages</span>
+          </div>
+        </div>
+      </section>
+   </section>
+        
+    <footer>
+      <nav>
+        <a href="admin.html">admin</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html">print</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers
+      </p>
+    </footer>
+  </body>
+</html>

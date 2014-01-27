@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+    
+    <script src="scripts/jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="scripts/helpers.js" type="text/javascript"></script>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="media.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global primary">
+        <a href="index.html">home</a>
+        <a href="media.html">browse by media</a>
+        <a href="doctor.html">browse by doctor</a>
+        <a href="companion.html">browse by companion</a>
+        <a href="search.html" class="active">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <h1>Search inventory</h1>
+      <p>Need to find a specific title and only remember a few details? Enter what you know and go from there.</p>
+    </section>
+    <hr />
+    
+    <form action="search-null.html" method="POST" id="search_form">
+      <nav class="controls">
+        <a href="#" class="simple active">Simple search</a>
+        <a href="#" class="advanced">Advanced search</a>
+      </nav>
+
+      <fieldset class="simple">
+        <label for="title">Title</label>
+        <span class="keyword">
+          <input type="text" name="title" size="60" />
+        </span>
+      </fieldset>
+      
+      <fieldset>
+        <label for="featuring">Featuring</label>
+        <span class="value">
+          <select name="doctor" multiple size="4">
+            <option value="first">First Doctor</option>
+            <option value="second">Second Doctor</option>
+            <option value="third">Third Doctor</option>
+            <option value="fourth">Fourth Doctor</option>
+            <option value="fifth">Fifth Doctor</option>
+            <option value="sixth">Sixth Doctor</option>
+            <option value="seventh">Seventh Doctor</option>
+            <option value="eighth">Eighth Doctor</option>
+            <option value="ninth">Ninth Doctor</option>
+            <option value="tenth">Tenth Doctor</option>
+            <option value="eleventh">Eleventh Doctor</option>
+          </select>
+          with
+          <select name="companion" multiple size="4">
+            <option value="all">All companions</option>
+            <optgroup label="First Doctor">
+              <option value="first-all">All companions</option>
+              <option value="susan">Susan Foreman</option>
+              <option value="barbara">Barbara Wright</option>
+              <option value="ian">Ian Chesterton</option>
+              <option value="vicki">Vicki</option>
+              <option value="steven">Steven Taylor</option>
+              <option value="katarina">Katarina</option>
+              <option value="sara_kingdom">Sara Kingdom</option>
+              <option value="dodo">Dodo Chaplet</option>
+              <option value="polly">Polly</option>
+              <option value="ben_jackson">Ben Jackson</option>
+            </optgroup>
+
+            <optgroup label="Second Doctor">
+              <option value="second-all">All companions</option>
+              <option value="polly">Polly</option>
+              <option value="ben_jackson">Ben Jackson</option>
+              <option value="jamie">Jamie_McCrimmon</option>
+              <option value="victoria">Victoria Waterfield</option>
+              <option value="zoe_heriot">Zoe Heriot</option>
+            </optgroup>
+
+            <optgroup label="Third Doctor">
+              <option value="third-all">All companions</option>
+              <option value="liz_shaw">Liz Shaw</option>
+              <option value="jo_grant">Jo Grant</option>
+              <option value="sarah_jane">Sarah Jane Smith</option>
+            </optgroup>
+          </select>   
+        </span>
+      </fieldset>
+      
+      <fieldset>
+        <label for="series">Series</label>
+        <span class="value">
+          <span class="checkgroup">
+              <label><input type="checkbox" name="series" value="classic_series">Classic series</label>
+              <label><input type="checkbox" name="series" value="new_series">New   series</label>
+              <label><input type="checkbox" name="series" value="spinoffs">Spinoffs</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" name="series" value="virgin_nas" />New Adventures</label>
+              <label><input type="checkbox" name="series" value="virgin_mas" />Missing Adventures</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" name="series" value="bbc_edas" />Eighth Doctor Adventures</label>
+              <label><input type="checkbox" name="series" value="bbc_pdas"/>Past Doctor Adventures</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" name="series" value="new_series_books" />New series (novels)</label>
+              <label><input type="checkbox" name="series" value="other_print" />Other books</label>
+          </span>
+        </span>
+      </fieldset>
+
+      <fieldset>
+        <label for="status">Status</label>
+        <span class="value">
+          <span class="checkgroup">
+              <label><input type="checkbox" name="status" value="owned">Owned</label>
+              <label><input type="checkbox" name="status" value="on_order">On order</label>
+              <label><input type="checkbox" name="status" value="upcoming">Upcoming</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" name="status" value="missing">Missing</label>
+              <label><input type="checkbox" name="status"   value="unreleased">Unreleased</label>
+              <label><input type="checkbox" name="status" value="wanted">Wanted</label>
+          </span>
+        </span>
+      </fieldset>
+      
+      <fieldset class="buttons simple">
+        <input type="reset" value="Reset form" />
+        <input type="submit" value="Search" />
+      </fieldset>
+    </form>
+    
+    <footer>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="media.html">by media</a>
+        <a href="doctor.html">by doctor</a>
+        <a href="companion.html">by companion</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+    </footer>
+    
+    <script type="text/javascript">
+      $(function() {
+        $('nav.controls a.simple').click(function() {
+          collapseAdvancedSearch();
+        });
+        
+        $('nav.controls a.advanced').click(function() {
+          expandAdvancedSearch();
+        });
+
+        $('nav.controls a').removeAttr('href');
+        $('nav.controls').show();
+        collapseAdvancedSearch();        
+      });
+    </script>
+  </body>
+</html>

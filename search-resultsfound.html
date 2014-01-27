@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+    
+    <script src="scripts/jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="scripts/helpers.js" type="text/javascript"></script>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="media.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global primary">
+        <a href="index.html">home</a>
+        <a href="media.html">browse by media</a>
+        <a href="doctor.html">browse by doctor</a>
+        <a href="companion.html">browse by companion</a>
+        <a href="search.html" class="active">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="search.html">search inventory</a>
+          results found
+        </ul>
+      </nav>
+
+      <h1>14 results found for <em>Daleks</em></h1>
+    </section>
+    
+    <form action="search-resultsfound.html" method="POST" id="search_form" class="bordered">
+      <nav class="controls">
+        <a href="#" class="simple">Simple search</a>
+        <a href="#" class="advanced active">Advanced search</a>
+      </nav>
+      
+      <fieldset class="simple">
+        <label for="title">Title</label>
+        <span class="value">
+          <input type="text" name="title" size="60" value="Daleks"/>
+        </span>
+      </fieldset>
+      
+      <fieldset>
+        <label for="featuring">Featuring</label>
+        <span class="value">
+          <select name="doctor" multiple size="4">
+            <option value="first">First Doctor</option>
+            <option value="second">Second Doctor</option>
+            <option value="third">Third Doctor</option>
+            <option value="fourth">Fourth Doctor</option>
+            <option value="fifth">Fifth Doctor</option>
+            <option value="sixth">Sixth Doctor</option>
+            <option value="seventh">Seventh Doctor</option>
+            <option value="eighth">Eighth Doctor</option>
+            <option value="ninth">Ninth Doctor</option>
+            <option value="tenth">Tenth Doctor</option>
+            <option value="eleventh">Eleventh Doctor</option>
+          </select>
+          with
+          <select name="companion" multiple size="4">
+            <option value="all">All companions</option>
+            <optgroup label="First Doctor">
+              <option value="first-all">All companions</option>
+              <option value="susan">Susan Foreman</option>
+              <option value="barbara">Barbara Wright</option>
+              <option value="ian">Ian Chesterton</option>
+              <option value="vicki">Vicki</option>
+              <option value="steven">Steven Taylor</option>
+              <option value="katarina">Katarina</option>
+              <option value="sara_kingdom">Sara Kingdom</option>
+              <option value="dodo">Dodo Chaplet</option>
+              <option value="polly">Polly</option>
+              <option value="ben_jackson">Ben Jackson</option>
+            </optgroup>
+
+            <optgroup label="Second Doctor">
+              <option value="second-all">All companions</option>
+              <option value="polly">Polly</option>
+              <option value="ben_jackson">Ben Jackson</option>
+              <option value="jamie">Jamie_McCrimmon</option>
+              <option value="victoria">Victoria Waterfield</option>
+              <option value="zoe_heriot">Zoe Heriot</option>
+            </optgroup>
+
+            <optgroup label="Third Doctor">
+              <option value="third-all">All companions</option>
+              <option value="liz_shaw">Liz Shaw</option>
+              <option value="jo_grant">Jo Grant</option>
+              <option value="sarah_jane">Sarah Jane Smith</option>
+            </optgroup>
+          </select>   
+        </span>
+      </fieldset>
+      
+      <fieldset>
+        <label for="series">Series</label>
+        <span class="value">
+          <span class="checkgroup">
+              <label><input type="checkbox" checked name="series" value="classic_series">Classic series</label>
+              <label><input type="checkbox" checked name="series" value="new_series">New   series</label>
+              <label><input type="checkbox" checked name="series" value="spinoffs">Spinoffs</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" checked name="series" value="virgin_nas" />New Adventures</label>
+              <label><input type="checkbox" checked name="series" value="virgin_mas" />Missing Adventures</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" checked name="series" value="bbc_edas" />Eighth Doctor Adventures</label>
+              <label><input type="checkbox" checked name="series" value="bbc_pdas"/>Past Doctor Adventures</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox" checked name="series" value="new_series_books" />New series (novels)</label>
+              <label><input type="checkbox" checked name="series" value="other_print" />Other books</label>
+          </span>
+        </span>
+      </fieldset>
+
+      <fieldset>
+        <label for="status">Status</label>
+        <span class="value">
+          <span class="checkgroup">
+              <label><input type="checkbox" checked name="status" value="owned" checked>Owned</label>
+              <label><input type="checkbox" checked name="status" value="on_order" checked>On order</label>
+              <label><input type="checkbox" checked name="status" value="upcoming" checked>Upcoming</label>
+          </span>
+          <span class="checkgroup">
+              <label><input type="checkbox"  name="status" value="missing">Missing</label>
+              <label><input type="checkbox"  name="status"   value="unreleased">Unreleased</label>
+              <label><input type="checkbox"  name="status" value="wanted">Wanted</label>
+          </span>
+        </span>
+      </fieldset>
+      
+      <fieldset class="buttons simple">
+        <input type="reset" value="Reset form" />
+        <input type="submit" value="Search" />
+      </fieldset>
+    </form>
+
+    <section class="entries top-border">
+      <h2>Classic series (6 results)</h2>
+      <table>
+        <colgroup span="1" class="title" />
+        <colgroup span="1" class="author" />
+        <colgroup span="1" class="release_date" />
+        <colgroup span="1" class="featuring" />
+        <colgroup span="1" class="rating" />
+        <colgroup span="1" class="status" />
+        
+        <thead>
+          <tr>
+            <td class="sortable">Title</td>
+            <td class="sortable">Author</td>
+            <td class="sortable">Release Date (format)</td>
+            <td class="sortable">Featuring</td>
+            <td class="sortable">Rating</td>
+            <td>Status</td>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <td><a href="media-dvdentry.html">The <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">Terry Nation</a></td>
+            <td>March 2006 (DVD)</td>
+            <td><a href="doctor-first-vma.html">First Doctor</a></td>
+            <td>[4 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-dvdentry.html">The <strong>Dalek</strong> Invasion of Earth</a></td>
+            <td><a href="media-author.html">Terry Nation</a></td>
+            <td>October 2003 (DVD)</td>
+            <td><a href="doctor-first-vma.html">First Doctor</a></td>
+            <td>[4 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-dvdentry.html">The Chase</a></td>
+            <td><a href="media-author.html">Terry Nation</a></td>
+            <td>July 2010 (DVD)</td>
+            <td><a href="doctor-first-vma.html">First Doctor</a></td>
+            <td>[3 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-dvdentry.html">Day of the <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">Louis Marks</a></td>
+            <td>September 2011 (DVD)</td>
+            <td><a href="doctor-first-vma.html">Third Doctor</a></td>
+            <td>[3 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-dvdentry.html">Destiny of the <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">Terry Nation</a></td>
+            <td>October 2008 (DVD)</td>
+            <td><a href="doctor-first-vma.html">Fourth Doctor</a></td>
+            <td>[3 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-dvdentry.html">Resurrection of the <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">Eric Saward</a></td>
+            <td>July 2003 (DVD)</td>
+            <td><a href="doctor-first-vma.html">Fifth Doctor</a></td>
+            <td>[3 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="entries">
+      <h2>Eighth Doctor Adventures (2 results)</h2>
+      <table>
+        <colgroup span="1" class="title" />
+        <colgroup span="1" class="author" />
+        <colgroup span="1" class="release_date" />
+        <colgroup span="1" class="featuring" />
+        <colgroup span="1" class="rating" />
+        <colgroup span="1" class="status" />
+        
+        <thead>
+          <tr>
+            <td class="sortable">Title</td>
+            <td class="sortable">Author</td>
+            <td class="sortable">Release Date</td>
+            <td class="sortable">Featuring</td>
+            <td class="sortable">Rating</td>
+            <td>Status</td>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <td><a href="media-bookentry.html">War of the <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">John Peel</a></td>
+            <td>October 1997</td>
+            <td><a href="doctor-first-vma.html">Eighth Doctor</a></td>
+            <td>[1 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+
+          <tr>
+            <td><a href="media-bookentry.html">Legacy of the <strong>Daleks</strong></a></td>
+            <td><a href="media-author.html">John Peel</a></td>
+            <td>April 1998</td>
+            <td><a href="doctor-first-vma.html">Eighth Doctor</a></td>
+            <td>[2 out of 5]</td>
+            <td>Owned</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="media.html">by media</a>
+        <a href="doctor.html">by doctor</a>
+        <a href="companion.html">by companion</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+    </footer>    
+
+    <script type="text/javascript">
+      $(function() {
+        $('nav.controls a.simple').click(function() {
+          collapseAdvancedSearch();
+        });
+        
+        $('nav.controls a.advanced').click(function() {
+          expandAdvancedSearch();
+        });
+
+        $('nav.controls a').removeAttr('href');
+        $('nav.controls').show();
+        collapseAdvancedSearch();        
+      });
+    </script>
+  </body>
+  
+</html>

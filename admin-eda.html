@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager</title>
+    
+    <link rel="stylesheet" href="styles/base-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/admin-styles.css" media="all" />
+    <link rel="stylesheet" href="styles/screen-styles.css" media="screen"></style>
+    <link rel="stylesheet" href="styles/print-styles.css" media="print"></style>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="admin.html"><img src="images/sidrat-logo.png" title="Doctor Who Inventory Manager"></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of Records, DVDs, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global primary">
+        <a href="admin.html" class="active">home</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries.html">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html" class="active">books</a>
+        <a href="admin-search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="media.html">administration</a>
+          Eighth Doctor Adventures
+        </ul>
+      </nav>
+      
+    </section>
+
+    <section class="entries">
+      <h2><a name="eda">Eighth Doctor Adventures</a> <span class="add_item button"><a href="admin-addbook.html">+</a></span></h2>
+      
+      <table>
+        <colgroup span="1" class="title" />
+        <colgroup span="1" class="author" />
+        <colgroup span="1" class="release_date" />
+        <colgroup span="1" class="featuring" />
+        <colgroup span="1" class="publisher" />
+        
+        <thead>
+          <tr>
+            <td class="sortable">Title</td>
+            <td class="sortable">Author</td>
+            <td class="sortable">Release Date</td>
+            <td>Featuring</td>
+            <td class="sortable">Publisher</td>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <td colspan="5">There don't appear to be any resources in the database yet. Would you like to <a href="admin-addbook.html">add one?</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <footer>
+      <nav>
+        <a href="admin.html">admin</a>
+        <a href="admin-classic.html">classic series</a>
+        <a href="admin-newseries">new series</a>
+        <a href="admin-spinoffs.html">spinoffs</a>
+        <a href="admin-print.html">print</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers
+      </p>
+    </footer>
+  </body>
+</html>
