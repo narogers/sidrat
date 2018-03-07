@@ -1,0 +1,95 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'Doctors', [:backend, :doctors] %>
+          <%= @doctor.label %>
+        </ul>
+      </nav>
+
+      <h1><%= @doctor.label %></h1>
+    </section>
+    
+    <%= form_for([:backend, @doctor],
+    		    :method => :put,
+                :html => {:id => "primary-form"}) do |f| %>
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :uploaded_image, 'Image' %>
+         <p class="tips">Supported image formats are JPEG and PNG</p>
+       </div>
+       <div class="fields">
+         <% @doctor.errors[:uploaded_image].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= image_tag @doctor.icon, :class => "preview", :alt => "Icon sized preview of the #{@doctor.label}" %>
+         <%= f.file_field :uploaded_image %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :label %>
+       </div>
+       <div class="fields">
+         <% @doctor.errors[:label].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.text_field :label, :size => 30, :placeholder => 'Display label', :required => true %>
+       </div>
+     </div>
+
+      <div class="label_and_fields">
+        <div class="label">
+          <%= f.label :description, 'Summary' %>
+          <p class="tips">A brief biography</p>
+        </div>
+      <div class="fields">
+        <%= f.text_area :description, :size => "60x20" %>
+       </div>
+     </div>
+     
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :played_by %>
+       </div>
+       <div class="fields">
+         <% @doctor.errors[:played_by].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.text_field :played_by, :placeholer => 'Actor / actress', :required => true %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label [:start_year], 'Years active' %>
+         <p class="tips">(ie 1963 to 1966)</p>
+       </div>
+       <div class="fields">
+         <% @doctor.errors[:start_year].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% @doctor.errors[:end_year].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.text_field :start_year, :size => 6 %> to <%= f.text_field :end_year, :size => 6 %>
+       </div>
+     </div>
+     
+       <div class="fields">
+         <%= submit_tag "Preview changes" %>
+         <span class="cancel_form button"><%= link_to 'Cancel changes', backend_doctor_path %></span>
+       </div>
+    <% end %>
+
+    <% content_for :scripts do %>
+    <script type="text/javascript">
+      $(function() {
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        
+        $('.submit_form a').click(
+          function() { $('#primary-form').submit(); }
+        );
+      });
+    </script>
+    <% end %>

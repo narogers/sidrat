@@ -1,0 +1,40 @@
+    <section class="entries">
+      <table>
+        <colgroup span="1" class="title" />
+        <colgroup span="1" class="author" />
+        <colgroup span="1" class="release_date" />
+        <colgroup span="1" class="featuring" />
+        <colgroup span="1" class="publisher" />
+        
+        <thead>
+          <tr>
+            <td class="sortable">Title</td>
+            <td class="sortable">Author</td>
+            <td class="sortable">Release Date</td>
+            <td>Featuring</td>
+            <td class="sortable">Publisher</td>
+          </tr>
+        </thead>
+        
+        <tbody>
+        <% if 0 == entries.length -%>
+          <tr>
+            <td colspan="5">
+              <p class="emphasis">No entries currently exist for this series.</p>
+            </td>
+          </tr>
+        <% else -%>
+          <% entries.each do |e| -%>
+            <tr>
+              <td><%= link_to e.title, backend_series_entry_path(:series_id => @series.abbreviation, :id => e) %></td>
+              <td><%= written_by e.contributors.to_a %></td>
+              <td><%= e.released_on.strftime("%B %Y") %></td>
+              <td><%= featuring e.doctors.to_a, e.companions.to_a %></td>
+              <td><%= e.publisher.name %></td>
+            </tr>
+          <% end -%>
+        <% end -%>
+        </tbody>
+      </table>
+    </section>
+        

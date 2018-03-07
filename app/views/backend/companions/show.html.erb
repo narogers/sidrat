@@ -1,0 +1,25 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'companions', [:backend, :companions] %>
+          <%= @companion.name %>
+        </ul>
+      </nav>
+    </section>
+
+    <% if flash[:notice] -%>
+    <section class="preview_controls">
+      <p><%= flash[:notice] %></p>
+    </section>
+    <% end -%>
+    
+    <article class="summary">
+      <%= render :partial => "shared/companion_summary" %>
+      
+      <nav>
+        <%= link_to 'i', edit_backend_companion_path(@companion), :class => 'edit_item button' %>
+        <%= link_to 'x', backend_companions_path, :class => "delete_item button" %>
+      </nav>
+    </section>
+
+    </article>

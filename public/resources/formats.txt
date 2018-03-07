@@ -1,0 +1,7 @@
+CD
+DVD
+VHS
+
+Comic
+Hardback
+Paperback

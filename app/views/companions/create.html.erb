@@ -1,0 +1,19 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'Doctors', [:backend, :doctors] %>
+          <%= @doctor.label %>
+        </ul>
+      </nav>
+    </section>
+
+     <section class="preview_controls">
+      <p>The record has been updated. Changes seen below will be visible immediately to users.</p>
+      <nav>
+        <%= link_to 'Return to form', edit_backend_doctor_path(@doctor), :class => 'submit_form' %>
+        <%= link_to 'Close preview', backend_doctors_path, :class => "submit_form" %>
+      </nav>
+    </section>
+
+    <%= render :partial => "shared/doctor_summary" %>
+    

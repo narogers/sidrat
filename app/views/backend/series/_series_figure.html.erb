@@ -1,0 +1,6 @@
+<figure>
+    <%= link_to image_tag (series.image, 
+        :title => series.name),
+        backend_series_path(:id => series.abbreviation) %>
+  <figcaption><%= series.name %></figcaption>
+</figure>

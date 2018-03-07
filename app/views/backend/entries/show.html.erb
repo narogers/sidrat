@@ -1,0 +1,20 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'series', backend_series_index_path %>
+          <%= link_to @entry.series.name, backend_series_path(:id => @entry.series.abbreviation) %>
+		  <%= @entry.title %>
+        </ul>
+      </nav>
+    </section>
+    
+    <% if flash[:notice] -%>
+    <div class="preview_controls">
+      <p><%= flash[:notice] %></p>
+    </div>
+    <% end -%>
+    
+    <%= render :partial => 'shared/entry_summary', 
+      :locals => { :allow_update => false, 
+        :edit_links => true,
+        :entry => @entry, } %>

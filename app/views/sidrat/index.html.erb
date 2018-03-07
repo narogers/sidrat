@@ -1,0 +1,58 @@
+    <nav class="global">
+        <a href="index.html" class="active">home</a>
+        <div class="submenu">
+          <a href="media.html">browse by media</a>
+        </div>
+        <a href="doctor.html">browse by doctor</a>
+        <a href="companion.html">browse by companion</a>
+        <a href="search.html">search</a>
+    </nav>
+    
+    <section class="page_context">
+      <h1>Special Inventory of Records, Discs, and Texts</h1>
+      <p>Welcome to SIDRAT. Designed so you can spend less time tracking the Doctor and more time watching him.</p>
+      <p>This database tracks Doctor Who related books and videos from the past twenty years. Allowing you to track which items you own, which ones are on the horizon, and which are most elusive the goal is to make it easier to manage your own personal collection.</p>
+    </section>
+
+    <section class="featured_item">
+      <a href="media-bookentry.html"><%= image_tag "covers/vna-12-small.jpg", :title => "The Pit", :class => "logo" %></a>
+      <section class="details">
+        <h2 class="title"><a href="media-bookentry.html">The Pit</a> (Virgin New Adventures)</h2>
+        <div class="creator"><a href="media-author.html">Neil Penswick</a></div>
+        <div class="publication_date">Published March 1993</div>
+        <div class="rating">
+          <input type="radio" name="rating_34" value="1" />
+          <input type="radio" name="rating_34" value="2" checked />
+          <input type="radio" name="rating_34" value="3" />
+          <input type="radio" name="rating_34" value="4" />
+          <input type="radio" name="rating_34" value="5" />          
+        </div>
+        <div class="summary">
+          <p>In an attempt to lift the Doctor out of his irritable and erratic mood, Bernice suggests he investigates the mystery of the Seven Planets - an entire planetary system that disappeared without trace several decades before Bernice was born.</p>
+          <p>One of the Seven Planets is a nameless giant, quarantined against all intruders. But when the TARDIS materializes, it becomes clear that the plane has other visitors: a hit-squad of killer androids; a trespassing scientist and his wife; and two shape-changing criminals with their team of slaves.</p>
+          <p>As riot and anarchy spread on the system's colonized worlds, the Doctor is flung into another universe while Bernice closes in on the horror that is about to be unleashed - a horror that comes from a terrible secret in the Time Lords' past.</p>
+        </div>
+      </section>
+    </section>
+    
+    <section class="cluster">
+      <figure>
+        <a href="/media"><%= image_tag "media-icon.jpg", :title => "Browse by media" %></a>
+        <figcaption>Browse by media</figcaption>
+      </figure>
+
+      <figure>
+        <a href="/doctor"><%= image_tag "doctor-icon.jpg", :title => "Browse by Doctor" %></a>
+        <figcaption>Browse by Doctor</figcaption>
+      </figure>
+
+      <figure>
+        <a href="/companion"><%= image_tag "companion-icon.png", :title => "Browse by companion" %></a>
+        <figcaption>Browse by companion</figcaption>
+      </figure>
+
+      <figure>
+        <a href="/search"><%= image_tag "search-icon.jpg", :title => "Search the database" %></a>
+        <figcaption>Search the database</figcaption>
+      </figure>
+    </section>

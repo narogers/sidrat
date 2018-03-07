@@ -1,0 +1,6 @@
+{
+ "multimedia": ["Classic series", "New series", "Spinoffs"],
+ 
+ "print": ["New adventures", "Missing adventures", Eighth Doctor Adventures", "Past Doctor Adventures", "New series (novels)", "Other works"]
+}
+ 

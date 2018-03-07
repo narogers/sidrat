@@ -1,0 +1,268 @@
+<% 
+method = ''
+url_location = ''
+
+if @entry.new_record? 
+  method = 'post'
+  url_location = backend_series_entries_path(:series_id => @entry.series.abbreviation)
+else
+  method = 'put'
+  url_location = backend_series_entry_path(:series_id => @entry.series.abbreviation, :id => @entry)
+end -%>
+
+<%= form_for [:backend, @entry],
+	  :url => url_location,
+      :method => method,
+      :id => 'resource_form' do |f| %>
+      <h2>Details</h2>
+      <fieldset id="metadata" class="active">
+      
+      <div class="label_and_fields">
+        <div class="label">
+          <label for="series">Series</label>
+        </div>
+        <div class="fields">
+          <p class="static"><%= @entry.series.name %></p>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><label>Publisher</label></div>
+        <div class="fields">
+            <% unless @entry.publisher.nil? or ['otherbooks',  'spinoffs'].include?(@entry.series.abbreviation) -%>
+              <p class="static">
+                <input type="hidden" name="publisher" value="<%= @entry.publisher.name %>">
+                <%= @entry.publisher.name %>
+              </p>
+            <% else -%>
+              <%= text_field_tag 'publisher[]', @entry.publisher.name, :size => 40 %>
+            <% end -%>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :title, 'Title' %></div>
+        <div class="fields">
+         <% @entry.errors[:title].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <%= f.text_field :title, :size => 60, 
+            :html => {:autofocus => true } %>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label"><label for="contributors[]">Writer(s)</label></div>
+        <div class="fields">
+         <% @entry.errors[:contributors].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <ul>
+            <% @entry.contributors.each_with_index do |con, i| -%>
+            <li><%= text_field_tag "contributors[]", con.name, :size => 60, :class => 'autocomplete', :id => "contributors_#{i}" %><span class="delete_item button"><a>x</a></span</li>
+            <% end -%>
+            <li><%= text_field_tag "contributors[]", nil, :size => 60, :class => 'autocomplete', :id => "contributors_#{@entry.contributors.length}" %><span class="add_item button"><a>+</a></span></li>
+          </ul>
+        </div>
+      </div>
+            
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :release_on, 'Publication date' %></div>
+        <div class="fields">
+         <% @entry.errors[:released_on].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <%= f.date_select :released_on,
+            :start_year => 1980,
+            :discard_day => true,
+            :order => [:month, :year] %>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :format, 'Format' %></div>
+        <div class="fields">         
+         <% @entry.errors[:format].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+           <div class="columns">
+            <% Entry::FORMATS[:print].each do |form| -%>
+              <label for="entry_format"><%= f.radio_button :format, form %> <%= form %></label>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :length, 'Length' %></div>
+        <div class="fields">
+        <% @entry.errors[:length].each do |e| -%>
+          <p class="errors"><%= e %></p>
+        <% end -%>
+        <%= f.text_field :length, :size => 12 %> pages
+        </div>
+      </div>
+      
+      <!--
+      <nav>
+        <a href="#featuring" class="next">Next section</a>
+      </nav>
+      -->
+      </fieldset>
+      
+      <h2>Featured characters</h2>
+      <fieldset id="featuring">
+
+      <div class="label_and_fields">  
+        <div class="label"><%= f.label :doctor_id, 'Doctor(s)' %></div>
+        <div class="fields">
+         <% @entry.errors[:doctors].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <div class="columns">
+          <% @doctors.each do |doctor| -%>
+            <label><%= check_box_tag 'doctor_ids[]', doctor.id,
+              @entry.doctors.include?(doctor) %><%= doctor.label %></label>
+          <% end -%>
+          </div>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><%= label :companions, 'Companion(s)' %></div>
+        <div class="fields">
+         <% @entry.errors[:companions].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <ul>
+            <% @entry.companions.each_with_index do |comp, i| -%>
+            <li><%= text_field_tag "companions[]", comp.name, :size => 60, :class => 'autocomplete', :id => "companions_#{i}" %><span class="delete_item button"><a>x</a></span</li>
+            <% end -%>
+            <li><%= text_field_tag "companions[]", '', :size => 60, :class => 'autocomplete', :id => "companions_#{@entry.companions.length}" %><span class="add_item button"><a>+</a></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!--
+      <nav>
+        <a href="#metadata" class="previous">Previous section</a>
+        <a href="#summary" class="next">Next section</a>
+      </nav>
+      -->
+      </fieldset>
+      
+      <h2>Summary</h2>
+      <fieldset id="summary">
+
+      <div class="label_and_fields">        
+        <div class="label"><%= f.label :description, 'Summary' %></div>
+        <div class="fields">
+        <% @entry.errors[:description].each do |e| -%>
+           <p class="errors"><%= e %></p>
+        <% end -%>
+        <%= f.text_area :description, :size => "60x15" %>
+        </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :uploaded_image, 'Image' %>
+         <p class="tips">Supported image formats are JPEG and PNG</p>
+       </div>
+       <div class="fields">
+         <% @entry.errors[:uploaded_image].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% unless @entry.icon.nil? -%>
+           <%= image_tag @entry.icon, :class => "preview", :alt => "Icon sized preview" %>
+         <% else -%>
+           <%= image_tag 'cover-placeholder.png', :class => 'preview' %>
+         <% end -%>
+         <%= f.file_field :uploaded_image %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="fields">
+         <%= f.submit 'Add new entry' %>
+         <span class="cancel_form button"><%= link_to 'Return to list', backend_series_path(:id => @entry.series.abbreviation) %></span>
+       </div>
+     </div>
+     
+     <!--
+      <nav>
+        <a href="#featuring" class="previous">Previous section</a>
+      </nav>
+      -->
+      </fieldset>
+<% end -%>
+
+    <% content_for :scripts do %>
+    <script type="text/javascript">
+      $(function() {
+      var field_counter = <%= @entry.contributors.length + @entry.companions.length %>;
+
+       $('fieldset input').click(function() {
+         toggleActiveFieldset(this);
+       });
+
+       $('fieldset textarea').click(function() {
+         toggleActiveFieldset(this);
+       });
+
+        $('.delete_item').live('click', function() {
+          $(this).parent().remove();
+        });
+       
+       $('.add_item').live('click', function() {
+         parent = $(this).parent();
+         new_copy = parent.clone();
+         
+         if ($(this).hasClass('add_item')) {
+           new_copy.children('span.button').empty().append('x').removeClass('add_item').addClass('delete_item');
+         }
+
+         $(this).parents('ul').prepend(new_copy);
+         
+         // Be explicit until it is time to streamline the code
+         field_counter++;
+         prefix = parent.find('input').attr('id');
+         prefix = prefix.substr(0, prefix.lastIndexOf('_'));
+         new_copy.attr('id', prefix + '_' + field_counter);
+         registerAutocomplete(prefix + '_' + field_counter);
+
+         return false;
+       });
+
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        
+        $('.submit_form a').click(
+          function() { $('form').submit(); }
+        );        
+      });
+
+      function toggleActiveFieldset(trigger) {
+         active_fieldset = $('fieldset.active');
+         parent_fieldset = $($(trigger).parents('fieldset')[0]);
+         
+         if (active_fieldset != parent_fieldset) {
+           active_fieldset.removeClass('active');
+           parent_fieldset.addClass('active');
+         }
+      }
+
+      function registerAutocomplete(field_id) {
+        action = field_id.split('_')[0];
+        action = action.substr(0, action.length - 1);
+        
+        field = $('#' + field_id);
+        
+        field.autocomplete({
+          source : '/search/' + action,
+          dataType: 'json',
+          minLength: 3,
+          appendTo: field.parent()
+        });
+      }
+      </script>
+      <% end -%>

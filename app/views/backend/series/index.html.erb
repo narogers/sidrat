@@ -1,0 +1,46 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          series
+        </ul>
+      </nav>
+
+      <h1>Database administration</h1>
+      <p>Need to add or update a record for an upcoming release? Select a category from the list below to get started.</p>
+      <hr />
+    </section>
+
+    <section class="cluster">
+    <h2>Books and print</h2>  
+      <section class="subgroup">
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['vna'] } %>     
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['vma'] } %>     
+      </section>
+      
+      <section class="subgroup">
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['eda'] } %>     
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['pda'] } %>     
+      </section>
+      
+      <section class="subgroup">
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['nsb'] } %>     
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['otherbooks'] } %>     
+      </section>
+    </section>
+    
+    <section class="cluster">
+    <h2>Video and audio</h2>
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['classic'] } %>     
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['newseries'] } %>     
+      <%= render :partial => 'series_figure', 
+        :locals => { :series => @series_hash['spinoffs'] } %>     
+      </figure>
+    </section>

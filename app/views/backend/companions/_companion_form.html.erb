@@ -1,0 +1,84 @@
+    <%= form_for([:backend, @companion],
+    		    :html => {:id => "primary-form"}) do |f| %>
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :uploaded_image, 'Image' %>
+         <p class="tips">Supported image formats are JPEG and PNG</p>
+       </div>
+       <div class="fields">
+         <% @companion.errors[:uploaded_image].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% unless @companion.icon.nil? -%>
+           <%= image_tag @companion.icon, :class => "preview", :alt => "Icon sized preview" %>
+         <% else -%>
+           <%= image_tag 'default-person.jpg', :class => 'preview' %>
+         <% end -%>
+         <%= f.file_field :uploaded_image %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :name %>
+       </div>
+       <div class="fields">
+         <% @companion.errors[:name].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.text_field :name, :size => 30, :placeholder => 'Complete name', :required => true %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :played_by %>
+       </div>
+       <div class="fields">
+         <% @companion.errors[:played_by].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.text_field :played_by, :size => 60, :placeholder => 'Actor / actress', :required => true %>
+       </div>
+     </div>
+     
+      <div class="label_and_fields">
+        <div class="label">
+          <%= f.label :doctors, 'Travels with' %>
+        </div>
+      <div class="fields">
+        <div class="columns">
+          <% @doctors.each do |doctor| -%>
+            <label><input type="checkbox" name="companion[doctor_ids][]" id="companion_doctors_<%= doctor.id %>" value="<%= doctor.id %>"<%- if params[:doctor].to_i == doctor.id or @companion.doctor_ids.include?(doctor.id) -%> checked<% end -%>><%= doctor.label %></label>
+          <% end -%>
+        </div>
+      </div>
+     </div>
+
+      <div class="label_and_fields">
+        <div class="label">
+          <%= f.label :description, 'Summary' %>
+          <p class="tips">A brief biography</p>
+        </div>
+      <div class="fields">
+        <%= f.text_area :description, :size => "60x20" %>
+       </div>
+     </div>
+
+       <div class="fields">
+         <%= submit_tag "Preview changes" %>
+         <span class="cancel_form button"><%= link_to 'Return to list', [:backend, :companions] %></span>
+       </div>
+    <% end %>
+
+    <% content_for :scripts do %>
+    <script type="text/javascript">
+      $(function() {
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        
+        $('.submit_form a').click(
+          function() { $('form').submit(); }
+        );        
+      });
+    </script>
+    <% end -%>

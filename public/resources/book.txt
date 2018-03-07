@@ -1,0 +1,11 @@
+<h3><a href="media-bookentry.html">The Left Handed Hummingbird</a></h3>
+<p class="contributors">Kate Orman</a>
+<h4>December 1993</h4>
+<p class="featuring">Featuring the Seventh Doctor</p>
+<div class="summary">
+  <p>1968: Cristian Alvarez meets the Doctor in London.</p>
+  <p>1978: The great temple of the Aztecs is discovered in Mexico.</p>
+  <p>1980: John Lennon is murdered in New York.</p>
+  <p>1994: A gunman runs amok in Mexico City.</p>
+</div>
+

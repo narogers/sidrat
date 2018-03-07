@@ -1,0 +1,10 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'series', backend_series_index_path %>
+          <%= link_to @entry.series.name, backend_series_path(:id => @entry.series.abbreviation) %>
+          edit entry
+      </nav>
+    </section>
+
+    <%= render :partial => 'form' %>

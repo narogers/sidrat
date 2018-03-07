@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIDRAT - Home</title>
+
+    <%= stylesheet_link_tag 'base-styles', :media => 'all' %>
+    <%= stylesheet_link_tag 'print-styles', :media => 'print' %>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><a href="index"><%= image_tag "sidrat-logo.png", :title => "SIDRAT - Special Inventory of DVDs, Recordings, and Texts" %></a></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of DVDs, Recordings, and Texts</p>
+      </div>
+    </header>
+    
+    <%= yield %>
+    
+    <footer>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="media.html">by media</a>
+        <a href="doctor.html">by doctor</a>
+        <a href="companion.html">by companion</a>
+        <a href="search.html">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+    </footer>
+  </body>
+</html>

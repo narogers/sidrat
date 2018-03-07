@@ -1,0 +1,39 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'series', backend_series_index_path %>
+          <%= @series.name %>
+        </ul>
+      </nav>
+
+      <article class="summary">
+        <%= render :partial => 'shared/series_summary', 
+          :local => { :series => @series } %>
+        <nav>
+          <span class="edit_item button"><%= link_to 'i',
+            edit_backend_series_path(:id => @series.abbreviation) %></span>
+          <span class="add_item button"><%= link_to '+',
+            new_backend_series_entry_path(:series_id => @series.abbreviation) %></span>
+        </nav>
+      </article>
+    </section>
+
+    <% if ['vna', 'eda'].include? @series.abbreviation
+      partial = 'single_doctor_list'
+    elsif ['vna', 'pda', 'nsb'].include? @series.abbreviation
+      partial = 'multiple_doctor_list'
+    elsif ['classic', 'newseries'].include? @series.abbreviation
+      partial = 'video_list'
+    elsif ['spinoffs', 'otherbooks'].include? @series.abbreviation
+      partial = 'spinoffs_list'
+    else 
+      partial = 'default_list'
+    end -%>
+    <% unless 'classic' == @series.abbreviation -%>
+      <%= render :partial => partial, :locals => { :entries => @series.entries } %>
+    <% else 
+      @series.entries.group_by(&:season).each do |season, entries| -%>      
+        <h2><% if 0 == season -%>Specials<% else -%>Season <%= season %><% end -%></h2>
+        <%= render :partial => partial, :locals => { :entries => entries } %>
+      <% end 
+     end -%>

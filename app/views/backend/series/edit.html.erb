@@ -1,0 +1,86 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'series', backend_series_index_path %>
+          Edit series details (<%= @series.name %>)
+        </ul>
+      </nav>
+
+      <h1>Edit series details</h1>
+    </section>
+
+    <%= form_for([:backend, @series],
+                :url => backend_series_path(:id => @series.abbreviation),
+    		    :html => {:id => "primary-form"}) do |f| %>
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :name, 'Name' %>
+       </div>
+       <div class="fields">
+         <p class="static"><%= @series.name %></p>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :series_started_on, 'Series spans' %>
+       </div>
+       <div class="fields">
+         <% @series.errors[:series_started_on].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% @series.errors[:series_ended_on].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <%= f.select :series_started_on, (1963..Date.today.year) %> to
+         <%= f.select :series_ended_on, (1964..Date.today.year) %>          
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :uploaded_image, 'Image' %>
+         <p class="tips">Supported image formats are JPEG and PNG</p>
+       </div>
+       <div class="fields">
+         <% @series.errors[:uploaded_image].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% unless @series.image.nil? -%>
+           <%= image_tag @series.image, :class => "preview", :alt => "Icon sized preview" %>
+         <% else -%>
+           <%= image_tag 'default-person.jpg', :class => 'preview' %>
+         <% end -%>
+         <%= f.file_field :uploaded_image %>
+       </div>
+     </div>
+
+      <div class="label_and_fields">
+        <div class="label">
+          <%= f.label :description, 'Summary' %>
+          <p class="tips">A brief summary</p>
+        </div>
+      <div class="fields">
+        <%= f.text_area :description, :size => "60x20" %>
+       </div>
+     </div>
+
+       <div class="fields">
+         <%= submit_tag "Preview changes" %>
+         <span class="cancel_form button"><%= link_to 'Return to list',   
+           [:backend, :series], 
+           :id => @series.abbreviation %></span>
+       </div>
+    <% end %>
+
+    <% content_for :scripts do %>
+    <script type="text/javascript">
+      $(function() {
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        
+        $('.submit_form a').click(
+          function() { $('form').submit(); }
+        );        
+      });
+    </script>
+    <% end -%>

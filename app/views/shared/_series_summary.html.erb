@@ -1,0 +1,7 @@
+<h2><%= @series.name %> (<%= @series.series_started_on %> to <%= @series.series_ended_on %>)</h2>
+<%= image_tag @series.image, :alt => @series.name %> 
+<% if @series.description.nil? or @series.description.empty? -%>
+  <p class="emphasis">No description provided</p>
+<% else -%>
+  <p><%= format @series.description %></p>
+<% end -%>

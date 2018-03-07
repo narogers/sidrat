@@ -1,0 +1,333 @@
+<% 
+  if @entry.new_record? 
+    method = 'post'
+    url_location = backend_series_entries_path(:series_id => @entry.series.abbreviation)
+  else
+    method = 'put'
+    url_location = backend_series_entry_path(:series_id => @entry.series.abbreviation, :id => @entry)
+  end -%>
+
+<%= form_for [:backend, @entry],
+	  :url => url_location,
+      :method => method,
+      :id => 'resource_form' do |f| %>
+      <h2>Details</h2>
+      <fieldset id="metadata" class="active">
+      
+      <div class="label_and_fields">
+        <div class="label">
+          <label>Series</label>
+        </div>
+        <div class="fields">
+          <p class="static"><%= @entry.series.name %></p>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><label>Publisher</label></div>
+        <div class="fields">
+            <% unless ['otherbooks', 'spinoffs'].include?(@entry.series.abbreviation) -%>
+              <%= hidden_field_tag :publisher, @entry.publisher.name %>
+              <p class="static"><%= @entry.publisher.name %></p>
+            <% else -%>
+              <%= text_field_tag :publisher, '' || @entry.publisher.name, :size => 60, :class => 'autocomplete' %>
+            <% end -%>
+          </p>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :title, 'Title' %></div>
+        <div class="fields">
+         <% @entry.errors[:title].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <%= f.text_field :title, :size => 60 %>
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label">Writer(s)</div>
+        <div class="fields">
+         <% @entry.errors[:contributors].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <ul>
+            <% @entry.contributors.each_with_index do |con, i| -%>
+            <li><%= text_field_tag "contributors[]", con.name, :size => 60, :class => 'autocomplete', :id => "contributors_#{i}" %><span class="delete_item button"><a>x</a></span></li>
+            <% end -%>
+            <li><%= text_field_tag "contributors[]", nil, :size => 60, :class => 'autocomplete', :id => "contributors_#{@entry.contributors.length}" %><span class="add_item button"><a>+</a></span></li>
+          </ul>
+        </div>
+      </div>
+            
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :released_on, 'Publication date' %></div>
+        <div class="fields">
+         <% @entry.errors[:released_on].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <%= f.date_select :released_on,
+            :start_year => 1976,
+            :end_year => 2013,
+            :discard_day => true,
+            :order => [:month, :year] %>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :format, 'Format' %></div>
+        <div class="fields">         
+         <% @entry.errors[:format].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+           <div class="columns">
+            <% lookup_table = []
+               case @entry.series.category 
+                 when 'Multimedia'
+                   lookup_table = Entry::FORMATS[:multimedia]
+                 when 'Print'
+                   lookup_table = Entry::FORMATS[:print]
+               end -%>
+            <% lookup_table.each do |format| -%>
+              <label><%= f.radio_button :format, format %> <%= format %></label>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+      
+      <% if 'Print' == @entry.series.category -%>
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :length, 'Length' %></div>
+       <% @entry.errors[:length].each do |e| -%>
+          <p class="errors"><%= e %></p>
+        <% end -%>
+        <div class="fields">         
+          <%= f.text_field :length, :size => 6 %> pages
+        </div>
+      </div>
+      <% end -%>
+      </fieldset>
+
+<% if 'Multimedia' == @entry.series.category -%>
+      <h2>Broadcast history</h2>
+      <fieldset id="broadcast_history">
+       <div class="label_and_fields">
+        <div class="label">
+          <%= f.label :season, 'Season (Serial)' %>
+          <p class="tips">For full season or special edition sets omit the serial</p>
+        </div>
+        <div class="fields">
+          <% @entry.errors[:season].each do |e| -%>
+            <p class="errors"><%= e %></p>
+          <% end -%>
+          <% @entry.errors[:serial].each do |e| -%>
+            <p class="errors"><%= e %></p>
+          <% end -%>
+          <% case @entry.series.abbreviation 
+            when 'classic'
+              limit = 26
+            else
+              limit = 10
+            end
+            
+            choices = [['Special', 0]]
+            (1..limit).each do |i|
+              choices.push [i, i]
+            end
+          -%>
+          
+          <%= f.select :season, choices %> (#<%= f.text_field :episode, :size => 4 %>)
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :episode_count, 'Episodes' %></div>
+        <div class="fields">
+        <% @entry.errors[:episode_count].each do |e| -%>
+          <p class="errors"><%= e %></p>
+        <% end -%>
+        <% @entry.errors[:length].each do |e| -%>
+          <p class="errors"><%= e %></p>
+        <% end -%>
+        <%= f.text_field :episode_count, :size => 4 %> (<%= f.text_field :length, :size => 6 %> minutes)
+        </div>
+      </div>
+      
+      <div class="label_and_fields">
+        <div class="label"><%= f.label :broadcast_start, 'Broadcast date(s)' %></div>
+        <div class="fields">
+         <% @entry.errors[:broadcast_status].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% @entry.errors[:broadcast_starting].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% @entry.errors[:broadcast_ending].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <label for="broadcast_status_unaired" class="span_all"><%= f.radio_button :broadcast_status, 'unaired' %>Never aired on television</label>
+         <br />
+         <label for="broadcast_status_aired" class="span_all"><%= f.radio_button :broadcast_status, 'broadcast' %>Aired from 
+         <%= f.datepicker :broadcast_starting, 
+           :dateFormat => 'yy-mm-dd',
+           :yearRange => "#{@entry.series.series_started_on}:#{@entry.series.series_ended_on}", 
+           :changeMonth => true, :changeYear => true %> until
+         <%= f.datepicker :broadcast_ending, 
+           :dateFormat => 'yy-mm-dd',
+           :yearRange => "#{@entry.series.series_started_on}:#{@entry.series.series_ended_on}", 
+           :changeMonth => true, :changeYear => true %></label>
+        </div>
+      </div>
+      </fieldset>
+<% end -%>
+
+      <h2>Featured characters</h2>
+      <fieldset id="featuring">
+
+      <div class="label_and_fields">  
+        <div class="label">Doctor(s)</div>
+        <div class="fields">
+         <% @entry.errors[:doctors].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <div class="columns">
+          <% @doctors.each do |doctor| -%>
+            <label><%= check_box_tag "doctors[]", doctor.id,
+              @entry.doctors.include?(doctor), :id => "doctor_#{doctor.id}" %><%= doctor.label %></label>
+          <% end -%>
+          </div>
+        </div>
+      </div>
+
+      <div class="label_and_fields">
+        <div class="label">Companion(s)</div>
+        <div class="fields">
+         <% @entry.errors[:companions].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+          <ul>
+            <% @entry.companions.each_with_index do |comp, i| -%>
+            <li><%= text_field_tag "companions[]", comp.name, :size => 60, :class => 'autocomplete', :id => "companions_#{i}" %><span class="delete_item button"><a>x</a></span</li>
+            <% end -%>
+            <li><%= text_field_tag "companions[]", '', :size => 60, :class => 'autocomplete', :id => "companions_#{@entry.companions.length}" %><span class="add_item button"><a>+</a></span></li>
+          </ul>
+        </div>
+      </div>
+      </fieldset>
+      
+      <h2>Summary</h2>
+      <fieldset id="summary">
+
+      <div class="label_and_fields">        
+        <div class="label"><%= f.label :description, 'Summary' %></div>
+        <div class="fields">
+        <% @entry.errors[:description].each do |e| -%>
+           <p class="errors"><%= e %></p>
+        <% end -%>
+        <%= f.text_area :description, :size => '60x15' %>
+        </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="label">
+         <%= f.label :uploaded_image, 'Image' %>
+         <p class="tips">Supported image formats are JPEG and PNG</p>
+       </div>
+       <div class="fields">
+         <% @entry.errors[:uploaded_image].each do |e| -%>
+           <p class="errors"><%= e %></p>
+         <% end -%>
+         <% unless @entry.icon.nil? -%>
+           <%= image_tag @entry.icon, :class => "preview", :alt => "Icon sized preview" %>
+         <% else -%>
+           <%= image_tag 'cover-placeholder.png', :class => 'preview' %>
+         <% end -%>
+         <%= f.file_field :uploaded_image %>
+       </div>
+     </div>
+
+     <div class="label_and_fields">
+       <div class="fields">
+         <%= f.submit 'Add new entry' %>
+         <span class="cancel_form button"><%= link_to 'Return to list', backend_series_path(:id => @entry.series.abbreviation) %></span>
+       </div>
+     </div>
+  </fieldset>
+<% end -%>
+
+    <% content_for :scripts do %>
+    <script type="text/javascript">
+      var field_counter = <%= @entry.contributors.length + @entry.companions.length %>;
+      
+      $(function() {
+       
+       $('fieldset input, fieldset textarea').click(function() {
+         toggleActiveFieldset(this);
+       });
+
+       $('.delete_item').live('click', function() {
+         $(this).parent().remove();
+         return false;
+       });
+       
+       $('.add_item').live('click', function() {
+         parent = $(this).parent();
+         new_copy = parent.clone();
+         
+         if ($(this).hasClass('add_item')) {
+           new_copy.children('span.button').empty()
+             .append('x')
+             .removeClass('add_item')
+             .addClass('delete_item');
+         }
+         $(this).parents('ul').append(new_copy);
+         
+         // Be explicit until it is time to streamline the code
+         field_counter++;
+         prefix = parent.find('input').attr('id');
+         prefix = prefix.substr(0, prefix.lastIndexOf('_'));
+         new_copy.find('input').attr('id', prefix + '_' + field_counter);
+         registerAutocomplete(prefix + '_' + field_counter);
+
+         return false;
+       });
+
+        $('input[type="submit"]').replaceWith('<span class="submit_form button"><a href="#">Save changes</a></span>');
+        
+        $('.submit_form a').click(
+          function() { $('form').submit(); return false; }
+        ); 
+        
+        $('input[type=\"text\"].autocomplete').each(
+          function() { registerAutocomplete(this.id); }
+        );
+      });
+      
+      function toggleActiveFieldset(trigger) {
+         active_fieldset = $('fieldset.active');
+         parent_fieldset = $($(trigger).parents('fieldset')[0]);
+         
+         if (active_fieldset != parent_fieldset) {
+           active_fieldset.removeClass('active');
+           parent_fieldset.addClass('active');
+         }
+      }
+      
+      function registerAutocomplete(field_id) {
+        console.log("Registering event for id " + field_id);
+        
+        action = field_id.split('_')[0];
+        action = action.substr(0, action.length - 1);
+        
+        field = $('#' + field_id);
+        
+        field.autocomplete({
+          source : '/search/' + action,
+          dataType: 'json',
+          minLength: 3,
+          appendTo: field.parent()
+        });
+      }
+  </script>
+<% end -%>

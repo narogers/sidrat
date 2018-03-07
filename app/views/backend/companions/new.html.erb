@@ -1,0 +1,12 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'Companions', [:backend, :companions] %>
+          Add new companion
+        </ul>
+      </nav>
+
+      <h1>Add new companion</h1>
+    </section>
+    
+    <%= render 'companion_form' %>

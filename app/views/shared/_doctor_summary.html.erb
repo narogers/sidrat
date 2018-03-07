@@ -1,0 +1,12 @@
+      <h1><%= @doctor.label %> <%= render :partial => "shared/broadcastrange", :object => @doctor %></h1>
+      <% if not @doctor.label.empty? -%>
+      <h2>Played by <%= @doctor.played_by %></h2>
+      <% end -%>
+
+      <%= image_tag @doctor.icon, :alt => "#{@doctor.label} (#{@doctor.played_by})" %>
+      <% if @doctor.description? %>
+        <%= format @doctor.description %>
+      <% else %>
+        <p><em>No description provided</em></p>
+      <% end %>
+ 

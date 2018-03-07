@@ -1,0 +1,44 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          Companions
+        </ul>
+      </nav>
+
+      <h1>Companions</h1>
+      <article class="summary">
+        <p>What would the Doctor be without his travel companions? From Susan, Ian, and Barbara through Sarah Jane and Jo Grant all the way down to Rose Tyler and Donna Noble each has brought their own dynamic to their relationship with the nomadic Time Lord.</p>
+      </article>
+    </section>
+
+    <% for doctor in @doctors do -%>
+    <section class="cluster">
+        <figure>
+          <%= image_tag doctor.icon, 
+            :alt => "Companions of the #{doctor.label}",
+            :title => "#{doctor.label}" %>
+          <figcaption><%= doctor.label %></figcaption>
+        </figure>
+
+        <div class="companion_list"><%= render :partial => 'companion_list', :locals => {:companions => doctor.companions, :doctor_id => doctor.id } %></div>
+    </section>
+    <% end -%>
+    
+    <section class="cluster">
+        <figure>
+          <%= image_tag 'companions-other.png', 
+            :alt => "Additional companions",
+            :title => "Additional companions" %>
+          <figcaption>Other companions</figcaption>
+        </figure>
+        <div class="companion_list">
+          <div class="columns">
+            <ul>
+              <li class="empty">No companions</li>
+              <li class="button add_item"><%= link_to '+', 
+              :controller => :companions,
+              :action => 'new' %></li>
+            </ul>
+          </div>
+        </div>
+    </section>

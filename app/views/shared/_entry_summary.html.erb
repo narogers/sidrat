@@ -1,0 +1,101 @@
+    <section class="item_details">
+        <%= image_tag entry.icon, :title => entry.title %>
+      
+        <section class="details">   
+        <h1 class="title"><%= entry.title %></h1>
+
+        <% if edit_links -%>
+          <nav>
+            <span><%= link_to 'i',
+              edit_backend_series_entry_path(:series_id => @entry.series.abbreviation,
+              :id => @entry.id), :class => "edit_item button" %></span>
+            <span><%= link_to 'x',
+              backend_series_path(:id => @entry.series.abbreviation), 
+              :class => "delete_item button" %></span>
+           </nav>
+        <% end -%>
+        
+        <div class="grouping">
+          <p class="creator">Written by <%= written_by entry.contributors.to_a %></p>
+          <p class="featuring">Featuring <% unless entry.doctors.nil? -%>the <% end -%><%= featuring entry.doctors.to_a, entry.companions.to_a %></p>
+        </div>
+        
+        <div class="grouping marquee">        
+          <div class="label_and_value status">
+            <span class="label">Rating</span>
+            <span class="value stars">
+              <div class="rating_options">
+              <% 5.downto(1) do |i| -%>
+                <%= radio_button_tag :rating, i, (i == entry.rating), :disabled => !allow_update %><label for="rating_<%= i %>"></label>
+              <% end -%>
+              </div>
+            </span>
+          </div>
+          <div class="label_and_value status">
+            <span class="label">Status</span>
+            <span class="value"><% unless entry.status.nil? -%><%= entry.status %><% else -%>Unknown<% end -%> <% if allow_update -%>(<a href="#" class="update">update</a>)<% end -%></span>
+          </div>
+        </div>
+        
+         <div class="summary"><% unless entry.description.nil? -%><%= format entry.description %><% else -%><p class="emphasis">No description provided</p><% end -%></div>
+
+        <% if entry.series.category == 'Multimedia' -%>
+        <h2>Broadcast history</h2>
+        <div class="grouping">
+          <div class="label_and_value">
+            <span class="label">Season</span>
+            <span class="value"><% unless entry.season.nil? or 0 == entry.season -%><%= entry.season %><% else -%>Special release<% end -%></span>
+          </div>
+
+          <% unless entry.episode.nil? -%>
+          <div class="label_and_value">
+            <span class="label">Serial</span>
+            <span class="value"><%= entry.episode %></span>
+          </div>
+          <% end -%>
+          
+          <div class="label_and_value">
+            <span class="label">Originally broadcast</span>
+            <% if 'broadcast' == entry.broadcast_status -%>
+            <span class="value"><%= entry.broadcast_starting.strftime("%B %d, %Y") %><% unless entry.broadcast_ending.nil? -%> to <%= entry.broadcast_ending.strftime("%B %d, %Y") %><% end -%> </span>
+            <% else -%>
+            <span class="value">Never broadcast</span>
+            <% end -%>
+          </div>
+        </div>
+        <% end -%>
+
+        <h2>Release details</h2>
+        <div class="grouping">
+          <div class="label_and_value">
+            <span class="label">Release Date</span>
+            <span class="value"><%= entry.released_on.strftime("%B %Y") %></span>
+          </div>
+
+          <div class="label_and_value">
+            <span class="label">Publisher</span>
+            <span class="value"><%= entry.publisher.name %></span>
+          </div>
+
+          <div class="label_and_value">
+            <span class="label">Format</span>
+            <span class="value"><%= entry.format %></span>
+          </div>
+
+          <div class="label_and_value">
+            <span class="label">Length</span>
+            <span class="value">
+              <% if entry.series.category == 'Multimedia' -%>
+                <% unless entry.episode.nil? -%>
+                  <%= entry.episode_count %> episodes (<%= entry.length %> minutes)
+                <% else -%>
+                  <%= entry.length %> minutes
+                <% end -%>
+              <% elsif entry.series.category == 'Print' -%>
+                <%= entry.length %> pages
+              <% end -%>
+            </span>
+          </div>
+        </div>
+      </section>
+   </section>

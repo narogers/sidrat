@@ -1,0 +1,28 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <a href="/index">home</a>
+          Doctors
+        </ul>
+      </nav>
+
+      <h1>Doctors</h1>
+      <article class="summary">
+        <p>Eleven Doctors have entertained audiences for the past 50 years. From the stalwart William Hartnell to the youthful Peter Davison and even more youthful Matt Smith each persona is a different look into the mind of a Time Lord.</p>
+      </article>
+    </section>
+    
+    <% for @row in @doctor_rows do -%>
+    <section class="cluster">
+      <% for @d in @row -%>
+      <figure>
+        <%= link_to image_tag(@d.icon, :title => "#{@d.label} (#{@d.played_by})"), [:doctors, @d] %>
+        <figcaption><%= @d.label %><br />(<%= @d.played_by %>)</figcaption>
+      </figure>
+      <% end -%>
+      
+      <% p = [0, 4-@row.length].max -%>
+      <% p.times do -%>
+        <figure><!-- Placeholder --></figure>
+      <% end -%>
+    </section>
+    <% end -%>

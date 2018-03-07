@@ -1,0 +1,11 @@
+ <h3><a href="media-classic-episode.html">An Unearthly Child</a></h3>
+ <h4>March 2006 (DVD)</h4>
+
+ <img src="images/cover-placeholder.png" title="An Unearthly Child" />
+ <p class="contributors">Written by Anthony Colburn"</p>
+ <p class="featuring">Featuring the First Doctor</p>
+ <div class="summary">
+   <p>Susan Foreman is a mystery to teachers Ian Chesterton and Barbara Wright, seemingly knowing more than she should about the past … and the future … </p>
+ </div>
+    
+      

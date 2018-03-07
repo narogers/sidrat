@@ -1,0 +1,24 @@
+    <section class="page_context">
+      <nav class="breadcrumbs">
+          <%= link_to 'administration', :backend %>
+          <%= link_to 'Doctors', [:backend, :doctors] %>
+          <%= @doctor.label %>
+        </ul>
+      </nav>
+    </section>
+
+     <section class="preview_controls">
+      <p>The record has been updated. Changes seen below will be visible immediately to users.</p>
+    </section>
+
+    <article class="summary">
+      <%= render :partial => "shared/doctor_summary" %>
+
+        <nav>
+          <span class="edit_item button"><%= link_to 'i', 
+            edit_backend_doctor_path(@doctor) %></span>
+          <span class="delete_item button"><%= link_to 'x',
+            [:backend, :doctors] %></span>
+        </nav>
+    </article>
+    

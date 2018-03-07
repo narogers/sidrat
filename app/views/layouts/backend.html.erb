@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor Who Inventory Manager <% if not @title.nil? -%>- <%= @title %><% end -%></title>
+    
+    <%= stylesheet_link_tag 'base-styles', :media => 'all' %>
+    <%= stylesheet_link_tag 'admin-styles', :media => 'all' %>
+    <%= stylesheet_link_tag 'print-styles', :media => 'print' %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/redmond/jquery-ui.css" %>    
+    
+    <%= javascript_include_tag 'application' %>
+  </head>
+  
+  <body>
+    <header>
+      <span class="logo"><%= link_to image_tag("sidrat-logo.png", 
+        :title => "SIDRAT - Special Inventory of DVDs, Recordings, and Texts"),
+        :backend %></span>
+      
+      <div class="banner">
+        <h1>SIDRAT</h1>
+        <p class="tagline">Special Inventory of DVDs, Recordings, and Texts</p>
+      </div>
+    </header>
+    
+    <nav class="global primary">
+        <%= link_to 'series', backend_series_index_path %>
+        <%= link_to 'doctors', backend_doctors_path %>
+        <%= link_to 'companions', backend_companions_path %>
+        <a href="/backend/contributors">contributors</a>
+        <a href="/backend/search">search</a>
+    </nav>
+    
+    <%= yield %>
+    
+    <footer>
+      <nav>
+        <%= link_to 'series', backend_series_index_path %>
+        <%= link_to 'doctors', [:backend, :doctors] %>
+        <%= link_to 'companions', [:backend, :companions] %>
+        <a href="/backend/contributors">contributors</a>
+        <a href="/backend/search">search</a>
+      </nav>
+      
+      <p class="copyright">
+        &copy; 2011 by Nathan Rogers<br />
+      </p>
+    </footer>
+    
+    <%= yield :scripts %>
+  </body>
+</html>

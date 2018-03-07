@@ -1,0 +1,22 @@
+      <h1><%= @companion.name %></h1>
+      <% unless @companion.played_by.empty? -%><h2>Played by <%= @companion.played_by %></h2><% end -%>
+      
+      <% unless @companion.icon.nil? -%>
+        <%= image_tag @companion.icon, :alt => "#{@companion.name}" %>
+      <% else -%>
+        <%= image_tag 'default-person.jpg', :alt => "#(@companion.name}" %>
+      <% end -%>
+      <% if 1 == @companion.doctors.length -%>
+        <p class="emphasis">Travels with the <%= @companion.doctors[0].label %></p>
+      <% elsif 2 == @companion.doctors.length -%>
+        <p class="emphasis">Travels with the <%= @companion.doctors[0].label %> and the <%= @companion.doctors[1].label %></p>
+      <% elsif 2 < @companion.doctors.length -%>
+        <p class="emphasis">Travels with the <%= @companion.doctors.each do |d| -%><%= d.label %> / <% end -%></p>      
+      <% end -%>
+
+      <% if @companion.description? %>
+        <%= format @companion.description %>
+      <% else %>
+        <p><em>No description provided</em></p>
+      <% end %>
+  

@@ -1,0 +1,16 @@
+        <div class="columns">
+          <ul>
+        <% unless 0 == companions.length -%>
+            <% companions.each do |c| -%>
+              <li><%= link_to c.name, [:backend, c] %></li>
+            <% end -%>
+        <% else -%>
+            <li class="emphasis">No companions</li>
+        <% end -%>
+            <li class="button add_item"><%= link_to '+', 
+              :controller => :companions,
+              :action => 'new',
+              :doctor => doctor_id
+              %></li>
+          </ul>
+        </div>
